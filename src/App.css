@@ -285,11 +285,13 @@ option:hover {
 }
 
 .gradText,
-.tag-cloud-tag {
+.tag-cloud-tag,
+.cloudText text {
   background: linear-gradient(to right, #1968FA, #AF59E6, #F04DC6, #FF55A1, #FF717E, #FF9662, #FFBA55, #FFDC5E 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: 700;
+  fill: url(#grad1);
 }
 
 .userName {
@@ -347,6 +349,7 @@ option:hover {
   padding: 8px;
   background-color: grey;
 }
+
 /* rgb(22 26 66) */
 
 .smallBox-dark {
@@ -356,7 +359,7 @@ option:hover {
   width: 80%;
   border: .2rem solid transparent;
   border-radius: 1rem;
-  background-image:linear-gradient(162.34deg, #161A42 22.61%, rgba(22, 26, 66, 0) 118.29%), linear-gradient(to right, #1968FA, #A05CE6, #D952CA, #FF51AC);
+  background-image: linear-gradient(162.34deg, #161A42 22.61%, rgba(22, 26, 66, 0) 118.29%), linear-gradient(to right, #1968FA, #A05CE6, #D952CA, #FF51AC);
   /* background-image: linear-gradient(162.34deg, #161A42 22.61%, rgba(22, 26, 66, 0) 118.29%),
     linear-gradient(#32eef5, #459bfc); */
   background-origin: border-box;
@@ -367,8 +370,18 @@ option:hover {
   margin: 1.5rem;
 }
 
-.progress-bar[aria-valuenow="0"] {
-  transition:100ms
+.progress-bar-animated {
+  animation: progress-bar-animation 2s linear;
+}
+
+@keyframes progress-bar-animation {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
 }
 
 .btn-header-link {
@@ -588,7 +601,7 @@ option:hover {
   width: 100%;
 }
 
-.navPagination .nav-item .nav-link{
+.navPagination .nav-item .nav-link {
   font-size: 1.5rem;
 }
 
@@ -627,12 +640,17 @@ option:hover {
   margin-top: -10px;
 }
 
-path {
+.mapSvg path {
   fill: url(#grad1);
-  opacity: 0.8;
+  opacity: .8;
 }
 
-path:hover {
+.circleChart .recharts-sector {
+  fill: url(#grad1);
+  opacity: 1;
+}
+
+.mapSvg path:hover {
   fill: purple;
   stroke: red;
   stroke-width: 3px;
