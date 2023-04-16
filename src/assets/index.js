@@ -1,0 +1,31 @@
+export { default as crossImg } from './img/cross.svg';
+export { default as tickImg } from './img/tick.svg';
+export { default as linkedinImg } from './img/linkedin.svg';
+export { default as locImg } from './img/loc.svg';
+export { default as mailImg } from './img/mail.svg';
+export { default as mapImg } from './img/map.svg';
+export { default as logoImg } from './img/logo.svg';
+export { default as pdfImg } from './img/pdf.svg';
+export { default as phoneImg } from './img/phone.svg';
+export { default as profileImg } from './img/profile.svg';
+export { default as resImg } from './img/res.svg';
+export { default as searchImg } from './img/search.svg';
+export { default as settingImg } from './img/setting.svg';
+export { default as downarrowImg } from './img/downarrow.svg';
+export { default as textsImg } from './img/texts.PNG';
+
+
+export { default as taylorImg } from './img/taylor.svg';
+export { default as saymourImg } from './img/seymour.svg';
+export { default as jackImg } from './img/jack.svg';
+export { default as ethanImg } from './img/ethan.svg';
+export { default as johnImg } from './img/john.svg';
+export { default as maryImg } from './img/mary.svg';
+export { default as borisImg } from './img/boris.svg';
+export { default as anitaImg } from './img/anita.svg';
+export { default as davidImg } from './img/david.svg';
+export { default as tonyImg } from './img/tony.svg';
+export { default as teddImg } from './img/ted.svg';
+export { default as tammyImg } from './img/tammy.svg';
+export { default as jollyImg } from './img/jolly.svg';
+export { default as harveyImg } from './img/harvey.svg';
