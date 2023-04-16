@@ -14,9 +14,20 @@ import { TagCloud } from "react-tagcloud";
 import { useEffect } from "react";
 
 function App() {
-
+  const [theme, setTheme] = useState("dark-theme");
   const [activeClass, setActiveClass] = useState(0);
-
+  const ToggleTheme = () => {
+    if (theme === "dark-theme") {
+      
+      setTheme("light-theme");
+    } else {
+     
+      setTheme("dark-theme");
+    }
+  };
+  useEffect(() => {
+    document.body.className = theme;
+  }, [theme]);
   const data = [
     {
       "name": "LOCATION",
@@ -143,8 +154,29 @@ function App() {
 
   return (
     <>
+      <div className="mytheme">
+        {theme === "light-theme" ? (
+          <img
+            src="https://static.vecteezy.com/system/resources/previews/009/665/616/original/sun-clipart-illustration-free-png.png"
+            width="24px"
+            height="24px"
+            alt=""
+            onClick={() => ToggleTheme()}
+          />
+        ) : (
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Font_Awesome_5_regular_moon.svg/1200px-Font_Awesome_5_regular_moon.svg.png"
+            onClick={() => ToggleTheme()}
+            width="24px"
+            height="24px"
+            alt=""
+            className="pointer"
+          />
+        )}
+      </div>
       <div className="row">
-        <div className="col-2 customDiv styleDiv">
+      
+        <div className={theme == "dark-theme" ? "col-2 customDiv styleDiv-dark" : "col-2 customDiv styleDiv-light"}>
 
           <div className="text-center">
             <img src={logoImg} className="mb-3" height={30} width={128} style={{ objectFit: "contain" }} />
@@ -157,7 +189,7 @@ function App() {
                 <li className="nav-item">
                   <NavLink
                     onClick={() => setActiveClass(index)}
-                    className={`nav-link d-flex align-items-center text-white ${activeClass === index ? 'active' : ""}`}
+                    className={`nav-link d-flex align-items-center  ${activeClass === index ? 'active' : ""}`}
                     data-toggle="tab"
                   >
                     <img src={user?.image[0]} className="mr-3" height="22px" width="22px" />
@@ -207,7 +239,7 @@ function App() {
                         <option value="">All</option>
                       </select>
                       <img src={searchImg} className="searchImg" />
-                      <input type="text" className="searchBar" placeholder="Search by: location, position, company, keywords..." />
+                      <input type="text" className={theme=="dark-theme"?"searchBar":"searchBar-light"} placeholder="Search by: location, position, company, keywords..." />
                     </div>
 
                   </div>
@@ -215,7 +247,7 @@ function App() {
 
                 <div className="col-4 custDiv2">
                   <button className="searchBtn">Search</button>
-                  <button className="showFilterBtn ml-3">Show Filters</button>
+                  <button className={theme == "dark-theme" ? "showFilterBtn ml-3" : "showFilterBtn-light ml-3"}>Show Filters</button>
                 </div>
               </div>
             </div>
@@ -231,7 +263,7 @@ function App() {
           <div className="row mt-5">
 
             <div className="col-6 mb-4">
-              <div className="gradBorder radarFont">
+              <div className={theme == "dark-theme" ? "gradBorder-dark radarFont" : "gradBorder-light radarFont"}>
                 <label className="labels">Radar Chart</label>
                 <ResponsiveContainer width="100%" height={240} className="radarCont">
                   <RadarChart
@@ -249,7 +281,7 @@ function App() {
             </div>
 
             <div className="col-6 mb-4">
-              <div className="gradBorder">
+              <div className={theme=="dark-theme"?"gradBorder-dark":"gradBorder-light"}>
                 <label className="labels">Skills & Keywords</label>
 
                 <div style={{ padding: "20px" }}>
@@ -274,7 +306,7 @@ function App() {
             </div>
 
             <div className="col-6 mb-4">
-              <div className="gradBorder">
+              <div className={theme=="dark-theme"?"gradBorder-dark":"gradBorder-light"}>
                 <label className="labels">Experience & Tenure</label>
 
                 <div style={{ margin: "0 20px 20px 20px" }}>
@@ -314,7 +346,7 @@ function App() {
             </div>
 
             <div className="col-6 mb-4">
-              <div className="gradBorder">
+              <div className={theme=="dark-theme"?"gradBorder-dark":"gradBorder-light"}>
                 <label className="labels">Location</label>
                 <div className="p-3">
                   <img src={mapImg} className="img-fluid mt-4 w-100" />
@@ -327,7 +359,7 @@ function App() {
         </div>
 
         <div className="col-3 customDiv">
-          <div className="gradBorderRight">
+          <div className={theme == "dark-theme" ? "gradBorderRight-dark" : "gradBorderRight-light"}>
             <div className="d-flex align-items-center justify-content-center">
               <div>
                 <div className="circleDiv">
@@ -371,7 +403,7 @@ function App() {
             <div className="mt-4 text-center">
               <h6 className="heads">RECENT ROLES</h6>
 
-              <div className="smallBox mx-auto mt-3">
+              <div className={theme == "dark-theme" ? "smallBox-dark mx-auto mt-3" :"smallBox-light mx-auto mt-3"}>
                 <div class="accordion" id="faq">
                   <div>
                     <div id="faqhead1">
@@ -418,7 +450,7 @@ function App() {
             <div className="mt-2 text-center">
               <h6 className="heads">QUALIFICATIONS</h6>
 
-              <div className="smallBox mx-auto mt-2">
+              <div className={theme == "dark-theme" ? "smallBox-dark mx-auto mt-3" :"smallBox-light mx-auto mt-3"}>
                 <div class="accordion" id="faq2">
                   <div>
                     <div id="faqhead4">
@@ -465,7 +497,7 @@ function App() {
             <div className="mt-2 mb-3 text-center">
               <h6 className="heads">FILTER QUESTIONS</h6>
 
-              <div className="smallBox mx-auto mt-2">
+              <div className={theme == "dark-theme" ? "smallBox-dark mx-auto mt-3" :"smallBox-light mx-auto mt-3"}>
                 <div style={{ margin: "15px 23px" }}>
                   <div className="d-flex align-items-center justify-content-start mt-2">
                     <img src={tickImg} className="mr-2" />
