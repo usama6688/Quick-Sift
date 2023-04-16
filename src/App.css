@@ -347,6 +347,7 @@ option:hover {
   padding: 8px;
   background-color: grey;
 }
+/* rgb(22 26 66) */
 
 .smallBox-dark {
   background: rgba(22, 26, 66, 0.7);
@@ -355,14 +356,19 @@ option:hover {
   width: 80%;
   border: .2rem solid transparent;
   border-radius: 1rem;
-  background-image: linear-gradient(162.34deg, #161A42 22.61%, rgba(22, 26, 66, 0) 118.29%),
-    linear-gradient(#32eef5, #459bfc);
+  background-image:linear-gradient(162.34deg, #161A42 22.61%, rgba(22, 26, 66, 0) 118.29%), linear-gradient(to right, #1968FA, #A05CE6, #D952CA, #FF51AC);
+  /* background-image: linear-gradient(162.34deg, #161A42 22.61%, rgba(22, 26, 66, 0) 118.29%),
+    linear-gradient(#32eef5, #459bfc); */
   background-origin: border-box;
   background-clip: content-box, border-box;
 }
 
 .accordion {
   margin: 1.5rem;
+}
+
+.progress-bar[aria-valuenow="0"] {
+  transition:100ms
 }
 
 .btn-header-link {
@@ -418,10 +424,14 @@ option:hover {
   color: var(--text-clr);
 }
 
+.nav-pills li .nav-link {
+  padding-left: 2rem;
+}
+
 .nav-pills li .nav-link.active {
   background: var(--active-bg);
   color: var(--text-clr) !important;
-  padding-left: 1.1rem;
+  padding-left: 1.7rem;
   border-left: .3rem solid #FD51AE;
 }
 
@@ -529,18 +539,24 @@ option:hover {
 } */
 
 .customDiv {
+  flex: 0 0 15% !important;
+  max-width: 15% !important;
+  height: 83rem;
+}
+
+.customDiv2 {
+  flex: 0 0 65% !important;
+  max-width: 65% !important;
+}
+
+.customDiv3 {
   flex: 0 0 20% !important;
   max-width: 20% !important;
   height: 83rem;
 }
 
-.customDiv2 {
-  flex: 0 0 60% !important;
-  max-width: 60% !important;
-}
-
 .navPagination li .nav-link {
-  color: #4B5468;
+  color: #6c7995;
 }
 
 .navPagination li .nav-link.active {
@@ -554,15 +570,26 @@ option:hover {
 
 .navPagination {
   display: flex;
+  align-items: center;
   justify-content: center;
   margin-left: auto;
   margin-right: auto;
   background: var(--active-bg);
   border: .1rem solid #495099;
-  border-radius: 9.425rem;
+  border-radius: .9rem;
   width: 80%;
   gap: 1rem;
-  margin-top: 9rem;
+  height: 4.3rem;
+}
+
+.navPagiDiv {
+  position: absolute;
+  bottom: 25px;
+  width: 100%;
+}
+
+.navPagination .nav-item .nav-link{
+  font-size: 1.5rem;
 }
 
 .nav-pills .nav-link {

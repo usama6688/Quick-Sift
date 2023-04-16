@@ -13,8 +13,6 @@ export { default as searchImg } from './img/search.svg';
 export { default as settingImg } from './img/setting.svg';
 export { default as downarrowImg } from './img/downarrow.svg';
 export { default as textsImg } from './img/texts.PNG';
-
-
 export { default as taylorImg } from './img/taylor.svg';
 export { default as saymourImg } from './img/seymour.svg';
 export { default as jackImg } from './img/jack.svg';
@@ -29,3 +27,4 @@ export { default as teddImg } from './img/ted.svg';
 export { default as tammyImg } from './img/tammy.svg';
 export { default as jollyImg } from './img/jolly.svg';
 export { default as harveyImg } from './img/harvey.svg';
+export { default as logoLightImg } from './img/logoLight.jpg';

@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 import './App.css';
-import { crossImg, linkedinImg, locImg, logoImg, mailImg, mapImg, pdfImg, phoneImg, profileImg, searchImg, settingImg, textsImg, tickImg } from "./assets";
+import { crossImg, linkedinImg, locImg, logoImg, logoLightImg, mailImg, mapImg, pdfImg, phoneImg, profileImg, searchImg, settingImg, textsImg, tickImg } from "./assets";
 import {
   Radar, RadarChart, PolarGrid,
   PolarAngleAxis, PolarRadiusAxis, BarChart, Bar, ResponsiveContainer, CartesianGrid, XAxis, YAxis, Legend
@@ -17,6 +17,7 @@ function App() {
   const [theme, setTheme] = useState("dark-theme");
   const [showName, setShowName] = useState("Taylor Sift");
   const [activeClass, setActiveClass] = useState(0);
+
   const ToggleTheme = () => {
     if (theme === "dark-theme") {
 
@@ -26,9 +27,11 @@ function App() {
       setTheme("dark-theme");
     }
   };
+
   useEffect(() => {
     document.body.className = theme;
   }, [theme]);
+
   const data = [
     {
       "name": "LOCATION",
@@ -96,60 +99,62 @@ function App() {
     },
   ]
 
-  // const text = [
-  //   {
-  //     text: 'AWS EC2',
-  //     value: 30,
-  //   },
-  //   {
-  //     text: 'Cloud Computing',
-  //     value: 35,
-  //   },
-  //   {
-  //     text: 'BSC',
-  //     value: 40,
-  //   },
-  //   {
-  //     text: 'Streams',
-  //     value: 30,
-  //   },
-  //   {
-  //     text: 'Machine',
-  //     value: 100,
-  //   },
-  //   {
-  //     text: 'Virtuous',
-  //     value: 33,
-  //   },
-  //   {
-  //     text: 'Learning',
-  //     value: 50,
-  //   },
-  //   {
-  //     text: 'GPC',
-  //     value: 36,
-  //   },
-  //   {
-  //     text: 'Full Stack',
-  //     value: 40,
-  //   },
-  //   {
-  //     text: 'Big Data',
-  //     value: 35,
-  //   },
-  //   {
-  //     text: 'IOT',
-  //     value: 40,
-  //   },
-  //   {
-  //     text: 'GPT4',
-  //     value: 45,
-  //   },
-  // ]
+  const text = [
+    {
+      text: 'AWS EC2',
+      value: 80,
+    },
+    {
+      text: 'Cloud Computing',
+      value: 75,
+    },
+    {
+      text: 'BSC',
+      value: 90,
+    },
+    {
+      text: 'Streams',
+      value: 100,
+    },
+    {
+      text: 'Machine',
+      value: 150,
+    },
+    {
+      text: 'Virtuous',
+      value: 93,
+    },
+    {
+      text: 'Learning',
+      value: 120,
+    },
+    {
+      text: 'GPC',
+      value: 136,
+    },
+    {
+      text: 'Full Stack',
+      value: 80,
+    },
+    {
+      text: 'Big Data',
+      value: 95,
+    },
+    {
+      text: 'IOT',
+      value: 90,
+    },
+    {
+      text: 'GPT4',
+      value: 75,
+    },
+  ]
 
-  // const options = {
-  //   rotations: 0,
-  // };
+  const options = {
+    fontSizes: [10, 50],
+    rotations: 0,
+    enableOptimizations: true
+  };
 
   const primaryColor = ['#1968FA', '#FF51AC'];
 
@@ -180,7 +185,7 @@ function App() {
         <div className={theme == "dark-theme" ? "col-2 customDiv styleDiv-dark" : "col-2 customDiv styleDiv-light"}>
 
           <div className="text-center">
-            <img src={logoImg} className="mb-3" height={30} width={128} style={{ objectFit: "contain" }} />
+            <img src={theme == "dark-theme" ? logoImg : logoLightImg} className="mb-3" height={30} width={128} style={{ objectFit: "contain" }} />
           </div>
 
           <ul className="nav nav-pills flex-column ">
@@ -202,23 +207,23 @@ function App() {
 
           </ul>
 
-          <ul className="nav navPagination">
-
-            {pages?.map((data, index) => {
-              return (
-                <li className="nav-item itemPages">
-                  <NavLink
-                    onClick={() => setActiveClass(index)}
-                    className={`nav-link d-flex align-items-center ${activeClass === index ? 'active' : ""}`}
-                    data-toggle="tab"
-                  >
-                    {data?.page}
-                  </NavLink>
-                </li>
-              )
-            })}
-
-          </ul>
+          <div className="navPagiDiv">
+            <ul className="nav navPagination">
+              {pages?.map((data, index) => {
+                return (
+                  <li className="nav-item itemPages">
+                    <NavLink
+                      onClick={() => setActiveClass(index)}
+                      className={`nav-link d-flex align-items-center ${activeClass === index ? 'active' : ""}`}
+                      data-toggle="tab"
+                    >
+                      {data?.page}
+                    </NavLink>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
 
         </div>
 
@@ -286,22 +291,18 @@ function App() {
               <div className={theme == "dark-theme" ? "gradBorder-dark" : "gradBorder-light"}>
                 <label className="labels">Skills & Keywords</label>
 
-                <div style={{ padding: "20px" }}>
-                  {/* <TagCloud
-                    minSize={12}
-                    maxSize={35}
-                    tags={words}
-                  /> */}
+                <div style={{ padding: "20px", height: "80%" }}>
+
                   <ResponsiveContainer>
-                    <TagCloud
+                    {/* <TagCloud
                       minSize={12}
                       maxSize={35}
                       tags={words}
-                    />
-                    {/* <ReactWordcloud
+                    /> */}
+                    <ReactWordcloud
                       words={text}
                       options={options}
-                    /> */}
+                    />
                   </ResponsiveContainer>
                 </div>
               </div>
@@ -469,7 +470,7 @@ function App() {
 
         </div>
 
-        <div className="col-3 customDiv">
+        <div className="col-3 customDiv3">
           <div className={`${theme == "dark-theme" ? "gradBorderRight-dark" : "gradBorderRight-light"} customScroll`}>
             <div className="circleDiv d-flex justify-content-center">
               <div className="percDiv">
