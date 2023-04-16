@@ -28,3 +28,8 @@ export { default as tammyImg } from './img/tammy.svg';
 export { default as jollyImg } from './img/jolly.svg';
 export { default as harveyImg } from './img/harvey.svg';
 export { default as logoLightImg } from './img/logoLight.jpg';
+
+export { default as settImg } from './img/settingIcon.svg';
+export { default as calImg } from './img/cal.svg';
+export { default as toltipImg } from './img/toltip.svg';
+export { default as radarImg } from './img/radar.svg';

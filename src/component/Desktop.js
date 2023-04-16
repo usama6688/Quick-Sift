@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 
-import { crossImg, linkedinImg, locImg, logoImg, mailImg, mapImg, pdfImg, phoneImg, profileImg, searchImg, settingImg, textsImg, tickImg } from "../assets";
+import { calImg, crossImg, linkedinImg, locImg, logoImg, logoLightImg, mailImg, mapImg, pdfImg, phoneImg, profileImg, radarImg, searchImg, settImg, settingImg, textsImg, tickImg, toltipImg } from "../assets";
 import {
     Radar, RadarChart, PolarGrid,
     PolarAngleAxis, PolarRadiusAxis, BarChart, Bar, ResponsiveContainer, CartesianGrid, XAxis, YAxis, Legend
@@ -17,19 +17,11 @@ import ChartSlider from "./ChartSlider";
 const Desktop = () => {
     const [theme, setTheme] = useState("dark-theme");
     const [activeClass, setActiveClass] = useState(0);
-    const ToggleTheme = () => {
-        if (theme === "dark-theme") {
 
-            setTheme("light-theme");
-        } else {
-
-            setTheme("dark-theme");
-        }
-    };
     useEffect(() => {
         document.body.className = theme;
     }, [theme]);
-    const primaryColor = ['#1968FA', '#FF51AC'];
+
     const data = [
         {
             "name": "LOCATION",
@@ -58,57 +50,18 @@ const Desktop = () => {
         }
     ]
 
-    const words = [
-        { value: 'AWS EC2', count: 21 },
-        { value: 'Cloud Computing', count: 20 },
-        { value: 'BSC', count: 28 },
-        { value: 'Streams', count: 25 },
-        { value: 'Machine', count: 43 },
-        { value: 'Virtuous', count: 18 },
-        { value: 'Learning', count: 20 },
-        { value: 'GPC', count: 28 },
-        { value: 'Full Stack', count: 23 },
-        { value: 'Big Data', count: 18 },
-        { value: 'IOT', count: 15 },
-        { value: 'GPT4', count: 26 },
-    ]
-
-    const pages = [
-        {
-            page: "1",
-        },
-        {
-            page: "2",
-        },
-        {
-            page: "3",
-        },
-        {
-            page: "4",
-        },
-        {
-            page: "5",
-        },
-        {
-            page: "6",
-        },
-        {
-            page: ">",
-        },
-    ]
     return (
         <div className="container-fluid wraper">
-            
-            <div className="row gap-2">
 
-                <div className={theme == "dark-theme" ? "col-3  styleDiv-dark sidbar" : "col-3 sidbar styleDiv-light"}>
+            <div className="row gap-2 pb-5">
+
+                <div className={theme == "dark-theme" ? "col-3 customDiv styleDiv-dark" : "col-3 customDiv styleDiv-light"}>
 
                     <div className="text-center">
-                        <img src={logoImg} className="mb-3" height={30} width={128} style={{ objectFit: "contain" }} />
+                        <img src={theme == "dark-theme" ? logoImg : logoLightImg} className="mb-3" height={30} width={128} style={{ objectFit: "contain" }} />
                     </div>
 
                     <ul className="nav nav-pills flex-column ">
-
 
                         <li className="nav-item">
                             <NavLink
@@ -116,37 +69,40 @@ const Desktop = () => {
                                 className={`nav-link d-flex align-items-center  ${activeClass === 0 ? 'active' : ""}`}
                                 data-toggle="tab"
                             >
-                                <img src="#" className="mr-3" height="22px" width="22px" />
+                                <img src={settImg} className="mr-3" height="22px" width="22px" />
                                 Settings
                             </NavLink>
                         </li>
+
                         <li className="nav-item">
                             <NavLink
                                 onClick={() => setActiveClass(1)}
                                 className={`nav-link d-flex align-items-center  ${activeClass === 2 ? 'active' : ""}`}
                                 data-toggle="tab"
                             >
-                                <img src="#" className="mr-3" height="22px" width="22px" />
+                                <img src={radarImg} className="mr-3" height="22px" width="22px" />
                                 Radar Chart
                             </NavLink>
                         </li>
+
                         <li className="nav-item">
                             <NavLink
                                 onClick={() => setActiveClass(1)}
                                 className={`nav-link d-flex align-items-center  ${activeClass === 3 ? 'active' : ""}`}
                                 data-toggle="tab"
                             >
-                                <img src="#" className="mr-3" height="22px" width="22px" />
+                                <img src={calImg} className="mr-3" height="22px" width="22px" />
                                 Experience
                             </NavLink>
                         </li>
+
                         <li className="nav-item">
                             <NavLink
                                 onClick={() => setActiveClass(1)}
                                 className={`nav-link d-flex align-items-center  ${activeClass === 4 ? 'active' : ""}`}
                                 data-toggle="tab"
                             >
-                                <img src="#" className="mr-3" height="22px" width="22px" />
+                                <img src={toltipImg} className="mr-3" height="22px" width="22px" />
                                 Filter Questions
                             </NavLink>
                         </li>
@@ -154,54 +110,73 @@ const Desktop = () => {
 
                     </ul>
 
-                    <div className="theme d-flex justify-content-center">
-                        <div className="dark mx-2" onClick={() => setTheme("dark-theme")}>Dark</div>
-                        <div className="light" onClick={() => setTheme("light-theme")}>Light</div>
+                    <div className="d-flex justify-content-center">
+                        <div className="theme">
+                            <input type="checkbox" class="checkbox" id="checkbox" defaultChecked={1} />
+                            <label for="checkbox" class="checkbox-label">
+
+                                <i class="fa fa-sun-o" aria-hidden="true" onClick={() => setTheme("light-theme")}><span className="themName">Light</span></i>
+
+                                <i class="fa fa-moon-o" aria-hidden="true" onClick={() => setTheme("dark-theme")}><span className="themName">Dark</span></i>
+
+                                <span class="ball">
+                                    {theme === "dark-theme" ?
+                                        <i class="fa fa-moon-o dimClr" aria-hidden="true" onClick={() => setTheme("dark-theme")}><span className="themName">Dark</span></i>
+                                        :
+                                        <i class="fa fa-sun-o dimClr" aria-hidden="true" onClick={() => setTheme("light-theme")}><span className="themName">Light</span></i>
+                                    }
+                                </span>
+                            </label>
+                        </div>
+                        
                     </div>
 
                 </div>
 
-                <div className="col-9">
+                <div className="col-9 customDiv4">
 
+                    <div className={theme === "dark-theme" ? "desk-dark ml-0" : "desk-light ml-0"}>
+                        <div className="divPad">
+                            <div className="row">
+                                <div className="col-8 d-flex flex-column justify-content-center">
+                                    <label className="labels mb-2">Radar Chart</label>
+                                    <span className="label-content mt-0 mb-4">Number of candidates shown on radar chart</span>
+                                    <ChartSlider />
+                                </div>
 
+                                <div className="col-4">
+                                    <div className={theme == "dark-theme" ? " radarFont" : " radarFont"}>
 
-                    <div className={theme === "dark-theme" ? "row desk-dark" : "row desk-light"}>
-                        <div className="row col-12">
-                            <div className="col-8  d-flex flex-column justify-content-center">
-                                <label className="labels">Radar Chart</label>
-                                <span className="label-content ">Number of candidates shown on radar chart</span>
-                                <ChartSlider/>
-                            </div>
-                            <div className="col-4 ">
-                                <div className={theme == "dark-theme" ? " radarFont" : " radarFont"}>
+                                        <ResponsiveContainer width="100%" height={240} className="radarCont">
+                                            <RadarChart
+                                                outerRadius="80%" data={data}>
+                                                <PolarGrid />
+                                                <PolarAngleAxis dataKey="name" />
+                                                <PolarRadiusAxis />
 
-                                    <ResponsiveContainer width="100%" height={240} className="radarCont">
-                                        <RadarChart
-                                            outerRadius="80%" data={data}>
-                                            <PolarGrid />
-                                            <PolarAngleAxis dataKey="name" />
-                                            <PolarRadiusAxis />
+                                                <Radar dataKey="A" stroke="#FF51AC" fill="#9822F4" fillOpacity={0.4} />
+                                                <Radar dataKey="B" stroke="#A05CE6" fill="#B744E3" fillOpacity={0.4} />
 
-                                            <Radar dataKey="A" stroke="#FF51AC" fill="#9822F4" fillOpacity={0.4} />
-                                            <Radar dataKey="B" stroke="#A05CE6" fill="#B744E3" fillOpacity={0.4} />
-
-                                        </RadarChart>
-                                    </ResponsiveContainer>
+                                            </RadarChart>
+                                        </ResponsiveContainer>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div className="col-12 b-border"></div>
 
-                        <div className="col-12  d-flex flex-column justify-content-center">
-                            <label className="labels">Experience</label>
-                            <span className="label-content">Choose minimum years experience</span>
+                        <div className=" b-border"></div>
+
+                        <div className="col-12 d-flex flex-column justify-content-center divPad pb-5">
+                            <label className="labels mb-4">Experience</label>
+                            <span className="label-content mt-0 mb-4">Choose minimum years experience</span>
                             <PeriodSlide />
                         </div>
+
                         <div className="col-12 b-border"></div>
 
-                        <div className="col-12  d-flex flex-column justify-content-center">
-                            <label className="labels">Filter Questions</label>
-                            <span className="label-content">Choose minimum years experience</span>
+                        <div className="col-12  d-flex flex-column justify-content-center divPad">
+                            <label className="labels mb-4">Filter Questions</label>
+                            <span className="label-content mt-0 mb-4">Choose minimum years experience</span>
                         </div>
                         <div className="col-12 b-border"></div>
                     </div>
