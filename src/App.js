@@ -3,7 +3,7 @@ import './App.css';
 import { crossImg, linkedinImg, locImg, logoImg, logoLightImg, mailImg, mapImg, pdfImg, phoneImg, profileImg, searchImg, settingImg, textsImg, tickImg } from "./assets";
 import {
   Radar, RadarChart, PolarGrid,
-  PolarAngleAxis, PolarRadiusAxis, BarChart, Bar, ResponsiveContainer, CartesianGrid, XAxis, YAxis, Legend
+  PolarAngleAxis, PolarRadiusAxis, BarChart, Bar, ResponsiveContainer, CartesianGrid, XAxis, YAxis, Legend, RadialBarChart, RadialBar
 } from 'recharts';
 import { CircleProgress } from 'react-gradient-progress';
 import ReactWordcloud from 'react-wordcloud';
@@ -12,11 +12,13 @@ import userData from "./data";
 import { NavLink } from "react-bootstrap";
 import { TagCloud } from "react-tagcloud";
 import { useEffect } from "react";
+import { useRef } from "react";
 
-function App() {
+function App({ progress }) {
   const [theme, setTheme] = useState("dark-theme");
   const [showName, setShowName] = useState("Taylor Sift");
   const [activeClass, setActiveClass] = useState(0);
+  const [progBar, setProgBar] = useState(10);
 
   const ToggleTheme = () => {
     if (theme === "dark-theme") {
@@ -32,7 +34,7 @@ function App() {
     document.body.className = theme;
   }, [theme]);
 
-  const data = [
+  const [chartData, setChartData] = useState([
     {
       "name": "LOCATION",
       "A": 120,
@@ -58,22 +60,22 @@ function App() {
       "A": 85,
       "B": 90,
     }
-  ]
+  ])
 
-  const words = [
-    { value: 'AWS EC2', count: 21 },
-    { value: 'Cloud Computing', count: 20 },
-    { value: 'BSC', count: 28 },
-    { value: 'Streams', count: 25 },
-    { value: 'Machine', count: 43 },
-    { value: 'Virtuous', count: 18 },
-    { value: 'Learning', count: 20 },
-    { value: 'GPC', count: 28 },
-    { value: 'Full Stack', count: 23 },
-    { value: 'Big Data', count: 18 },
-    { value: 'IOT', count: 15 },
-    { value: 'GPT4', count: 26 },
-  ]
+  // const words = [
+  //   { value: 'AWS EC2', count: 21 },
+  //   { value: 'Cloud Computing', count: 20 },
+  //   { value: 'BSC', count: 28 },
+  //   { value: 'Streams', count: 25 },
+  //   { value: 'Machine', count: 43 },
+  //   { value: 'Virtuous', count: 18 },
+  //   { value: 'Learning', count: 20 },
+  //   { value: 'GPC', count: 28 },
+  //   { value: 'Full Stack', count: 23 },
+  //   { value: 'Big Data', count: 18 },
+  //   { value: 'IOT', count: 15 },
+  //   { value: 'GPT4', count: 26 },
+  // ]
 
   const pages = [
     {
@@ -150,6 +152,13 @@ function App() {
     },
   ]
 
+  const handleChartClick = (user, index) => {
+    setActiveClass(index);
+    setShowName(user?.name);
+    setChartData(chartData.map(item => ({ ...item, A: Math.floor(Math.random() * 100) + 50, B: Math.floor(Math.random() * 100) + 50 })));
+    setProgBar(Math.floor(Math.random() * (100 - 10 + 1) + 10));
+  }
+
   const options = {
     fontSizes: [10, 50],
     rotations: 0,
@@ -157,6 +166,43 @@ function App() {
   };
 
   const primaryColor = ['#1968FA', '#FF51AC'];
+
+  const circleSizeSmall = 150;
+
+  const progressBarRef = useRef(null);
+  const progressBarRef2 = useRef(null);
+  const progressBarRef3 = useRef(null);
+  const progressBarRef4 = useRef(null);
+
+  useEffect(() => {
+    const progressBar = progressBarRef.current;
+    const progressBar2 = progressBarRef2.current;
+    const progressBar3 = progressBarRef3.current;
+    const progressBar4 = progressBarRef4.current;
+    progressBar.classList.add('animate-progress-bar');
+    progressBar2.classList.add('animate-progress-bar');
+    progressBar3.classList.add('animate-progress-bar');
+    progressBar4.classList.add('animate-progress-bar');
+    progressBar.style.width = `${progBar}%`;
+    progressBar2.style.width = `${progBar}%`;
+    progressBar3.style.width = `${progBar}%`;
+    progressBar4.style.width = `${progBar}%`;
+    progressBar.setAttribute('aria-valuenow', progBar);
+    progressBar2.setAttribute('aria-valuenow', progBar);
+    progressBar3.setAttribute('aria-valuenow', progBar);
+    progressBar4.setAttribute('aria-valuenow', progBar);
+    setTimeout(() => {
+      progressBar.classList.remove('animate-progress-bar');
+      progressBar2.classList.remove('animate-progress-bar');
+      progressBar3.classList.remove('animate-progress-bar');
+      progressBar4.classList.remove('animate-progress-bar');
+    }, 1000);
+  }, [progBar]);
+
+  const datax = [
+    { name: 'A', value: 70 },
+  ];
+
 
   return (
     <>
@@ -194,7 +240,7 @@ function App() {
               return (
                 <li className="nav-item">
                   <NavLink
-                    onClick={() => { setActiveClass(index); setShowName(user?.name) }}
+                    onClick={() => handleChartClick(user, index)}
                     className={`nav-link d-flex align-items-center  ${activeClass === index ? 'active' : ""}`}
                     data-toggle="tab"
                   >
@@ -274,7 +320,7 @@ function App() {
                 <label className="labels">Radar Chart</label>
                 <ResponsiveContainer width="100%" height={240} className="radarCont">
                   <RadarChart
-                    outerRadius="80%" data={data}>
+                    outerRadius="80%" data={chartData}>
                     <PolarGrid />
                     <PolarAngleAxis dataKey="name" />
                     <PolarRadiusAxis />
@@ -291,7 +337,7 @@ function App() {
               <div className={theme == "dark-theme" ? "gradBorder-dark" : "gradBorder-light"}>
                 <label className="labels">Skills & Keywords</label>
 
-                <div style={{ padding: "20px", height: "80%" }}>
+                <div className="cloudText" style={{ padding: "20px", height: "80%" }}>
 
                   <ResponsiveContainer>
                     {/* <TagCloud
@@ -314,27 +360,26 @@ function App() {
 
                 <div style={{ margin: "0 20px 20px 20px" }}>
                   <label className="chartLabel">Total Experience (Years)</label>
-                  <div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style={{ width: "35%" }}>
-                    </div>
+                  {/* <div class="progress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style={{ width: "75%" }}></div>
+                  </div> */}
+                  <div className="progress">
+                    <div ref={progressBarRef} className="progress-bar" role="progressbar" style={{ width: 50 }} aria-valuenow={0} aria-valuemin={0} aria-valuemax={100}></div>
                   </div>
 
                   <label className="chartLabel">Industry Experience</label>
-                  <div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style={{ width: "45%" }}>
-                    </div>
+                  <div className="progress">
+                    <div ref={progressBarRef2} className="progress-bar" role="progressbar" style={{ width: 60 }} aria-valuenow={0} aria-valuemin={0} aria-valuemax={100}></div>
                   </div>
 
                   <label className="chartLabel">Longest Tenure</label>
-                  <div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style={{ width: "55%" }}>
-                    </div>
+                  <div className="progress">
+                    <div ref={progressBarRef3} className="progress-bar" role="progressbar" style={{ width: 70 }} aria-valuenow={0} aria-valuemin={0} aria-valuemax={100}></div>
                   </div>
 
                   <label className="chartLabel">Shortest Tenure</label>
-                  <div class="progress">
-                    <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style={{ width: "65%" }}>
-                    </div>
+                  <div className="progress">
+                    <div ref={progressBarRef4} className="progress-bar" role="progressbar" style={{ width: 20 }} aria-valuenow={0} aria-valuemin={0} aria-valuemax={100}></div>
                   </div>
 
                   <div className="d-flex justify-content-between">
@@ -351,7 +396,7 @@ function App() {
             <div className="col-6 mb-4">
               <div className={theme == "dark-theme" ? "gradBorder-dark" : "gradBorder-light"}>
                 <label className="labels">Location</label>
-                <div className="p-3">
+                <div className="p-3 mapSvg">
                   <svg version="1.1" id="mapsection" x="0px" y="0px"
                     width="200px" height="230px" viewBox="0 0 1200 1230" enable-background="new 0 0 1200 1230"
                   >
@@ -473,11 +518,45 @@ function App() {
         <div className="col-3 customDiv3">
           <div className={`${theme == "dark-theme" ? "gradBorderRight-dark" : "gradBorderRight-light"} customScroll`}>
             <div className="circleDiv d-flex justify-content-center">
-              <div className="percDiv">
+              <div className="percDiv circleChart">
                 <h5 className="percSize">90 <sup>%</sup></h5>
                 <h5 className="percSizeText">match</h5>
               </div>
-              <CircleProgress percentage={90} width="180" primaryColor={primaryColor} strokeWidth={10} fontColor="white" fontSize="45px" />
+
+              <div className="circleChart">
+                <RadialBarChart
+                  width={circleSizeSmall}
+                  height={circleSizeSmall}
+                  cx={circleSizeSmall / 2}
+                  cy={circleSizeSmall / 2}
+                  innerRadius={80}
+                  outerRadius={65}
+                  barSize={10}
+                  data={[
+                    {
+                      name: "A",
+                      value: progBar,
+                    },
+                  ]}
+                  startAngle={90}
+                  endAngle={-270}
+                >
+                  <PolarAngleAxis
+                    type="number"
+                    domain={[0, 100]}
+                    angleAxisId={0}
+                    tick={false}
+                  />
+                  <RadialBar
+                    clockWise
+                    dataKey="value"
+                    cornerRadius={circleSizeSmall / 2}
+                    fill="#82ca9d"
+                    isAnimationActive={true}
+                  />
+                </RadialBarChart>
+              </div>
+              {/* <CircleProgress percentage={progBar} width="180" primaryColor={primaryColor} strokeWidth={10} fontColor="white" fontSize="45px" /> */}
             </div>
 
             <div className="d-flex align-items-center justify-content-center mt-3">
