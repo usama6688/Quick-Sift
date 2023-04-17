@@ -285,7 +285,7 @@ const Main = () => {
                 size="md"
                 show={modalIsOpen}
                 handleClose={closeModal}
-                className="ml-0 searchModal"
+                className={theme == "dark-theme" ? "ml-0 searchModal-dark" : "ml-0 searchModal-light"}
             >
 
                 <Modal.Body className='customScroll m-2'>
