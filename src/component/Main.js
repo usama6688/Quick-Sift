@@ -13,7 +13,7 @@ import { useEffect } from "react";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import ModelComponent from "./Modal";
-import Select from 'react-select';
+import '../App.css';
 
 const Main = () => {
     const [theme, setTheme] = useState("dark-theme");
@@ -442,7 +442,7 @@ const Main = () => {
                     <div className="d-flex justify-content-center">
                         <div className="theme">
                             <input type="checkbox" class="checkbox" id="checkbox" defaultChecked={1} />
-                            <label for="checkbox" class="checkbox-label">
+                            <label for="checkbox" className={theme == "dark-theme" ? "checkbox-label" : "checkbox-label-light"}>
 
                                 <i class="fa fa-sun-o" aria-hidden="true" onClick={() => setTheme("light-theme")}><span className="themName">Light</span></i>
 
