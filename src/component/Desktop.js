@@ -113,7 +113,7 @@ const Desktop = () => {
                     <div className="d-flex justify-content-center">
                         <div className="theme">
                             <input type="checkbox" class="checkbox" id="checkbox" defaultChecked={1} />
-                            <label for="checkbox" class="checkbox-label">
+                            <label for="checkbox" className={theme == "dark-theme" ? "checkbox-label" : "checkbox-label-light"}>
 
                                 <i class="fa fa-sun-o" aria-hidden="true" onClick={() => setTheme("light-theme")}><span className="themName">Light</span></i>
 

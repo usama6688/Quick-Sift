@@ -893,9 +893,21 @@ input[type="range"]::-moz-range-thumb {
   justify-content: space-between;
   align-items: center;
 }
+.checkbox-label-light {
+  background-color: #f8f6f6;
+  width: 18rem;
+  height: 5rem;
+  border-radius: 5rem;
+  position: relative;
+  padding: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 .fa-moon-o {
-  color: white;
+  color: rgb(8, 8, 8);
   font-size: 2rem;
   display: flex;
   align-items: center;
@@ -932,7 +944,19 @@ input[type="range"]::-moz-range-thumb {
   justify-content: center;
   align-items: center;
 }
-
+.checkbox-label-light .ball {
+  background-color: #181C4A;
+  width: 8.5rem;
+  height: 4.7rem;
+  position: absolute;
+  left: 4px;
+  top: 2px;
+  border-radius: 50px;
+  transition: transform 0.2s linear;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .dimClr {
   color: rgba(255, 255, 255, 0.4);
 }
@@ -940,7 +964,9 @@ input[type="range"]::-moz-range-thumb {
 .checkbox:checked+.checkbox-label .ball {
   transform: translateX(8.5rem);
 }
-
+.checkbox:checked+.checkbox-label-light .ball {
+  transform: translateX(8.5rem);
+}
 .addrDiv {
   width: 80%;
   margin-left: auto;
