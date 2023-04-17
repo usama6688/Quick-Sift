@@ -330,7 +330,7 @@ option:hover {
   height: 100%;
 }
 
-.searchModal .modal-content {
+.searchModal-dark .modal-content {
   border: .2rem solid transparent;
   border-radius: 1rem;
   background-image: linear-gradient(#161A42, #161A42),
@@ -340,12 +340,24 @@ option:hover {
   max-height: 95vh;
 }
 
-.searchModal .modal-body {
-  background: linear-gradient(#161A42, #161A42);
+.searchModal-dark .modal-body {
   border-radius: 1rem;
   padding: 1.5rem 5rem;
 }
+.searchModal-light .modal-content {
+  border: .2rem solid transparent;
+  border-radius: 1rem;
+  background-image: linear-gradient(#F4FBFC, #F4FBFC),
+    linear-gradient(to right, #1968FA, #A05CE6, #D952CA, #FF51AC);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  max-height: 95vh;
+}
 
+.searchModal-light .modal-body {
+  border-radius: 1rem;
+  padding: 1.5rem 5rem;
+}
 .gradBorderRight-light {
   border: .2rem solid transparent;
   border-radius: 1rem;
