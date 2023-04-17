@@ -1,5 +1,5 @@
 import { React, useState } from "react";
-import { linkedinImg, locImg, logoImg, logoLightImg, mailImg, mapImg, pdfImg, phoneImg, profileImg, searchImg, settingImg, textsImg } from "../assets";
+import { linkedinImg, locImg, logoImg, logoLightImg, mailImg, mapImg, pdfImg, phoneImg, profileImg, searchImg, settDarkImg, settingImg, textsImg } from "../assets";
 import {
     Radar, RadarChart, PolarGrid,
     PolarAngleAxis, PolarRadiusAxis, BarChart, Bar, ResponsiveContainer, CartesianGrid, XAxis, YAxis, Legend, RadialBarChart, RadialBar
@@ -13,6 +13,7 @@ import { useEffect } from "react";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import ModelComponent from "./Modal";
+import Select from 'react-select';
 
 const Main = () => {
     const [theme, setTheme] = useState("dark-theme");
@@ -24,6 +25,20 @@ const Main = () => {
     const [skillTags, setSkillTags] = useState([]);
     const [qualiTags, setQualiTags] = useState([]);
     const [empTags, setEmpTags] = useState([]);
+    const [showAddr, setShowAddr] = useState("London, United Kingdom");
+    const [showMail, setShowMail] = useState("taylor.sift@outlook.com");
+    const [showPhone, setShowPhone] = useState("44 2258 257 021");
+    const [showLink, setShowLink] = useState("linkedin.com/taylor-sift");
+
+    const [showRole1, setShowRole1] = useState("Test");
+    const [showRole2, setShowRole2] = useState("Test2");
+    const [showRole3, setShowRole3] = useState("Test3");
+    const [showQuali1, setShowQuali1] = useState("BSc1");
+    const [showQuali2, setShowQuali2] = useState("BSc2");
+    const [showQuali3, setShowQuali3] = useState("BSc3");
+    const [showQues1, setShowQues1] = useState("Demo1");
+    const [showQues2, setShowQues2] = useState("Demo2");
+    const [showQues3, setShowQues3] = useState("Demo3");
 
     const ToggleTheme = () => {
         if (theme === "dark-theme") {
@@ -163,13 +178,6 @@ const Main = () => {
         enableOptimizations: true
     };
 
-    const handleChartClick = (user, index) => {
-        setActiveClass(index);
-        setShowName(user?.name);
-        setChartData(chartData.map(item => ({ ...item, A: Math.floor(Math.random() * 100) + 50, B: Math.floor(Math.random() * 100) + 50 })));
-        setProgBar(Math.floor(Math.random() * (100 - 10 + 1) + 10));
-    }
-
     const circleSizeSmall = 150;
 
     const progressBarRef = useRef(null);
@@ -258,6 +266,34 @@ const Main = () => {
         setEmpTags(empTags?.filter(tag => tag !== data));
     };
 
+    const selectOptions = [
+        { value: 'chocolate', label: 'Chocolate' },
+        { value: 'strawberry', label: 'Strawberry' },
+        { value: 'vanilla', label: 'Vanilla' }
+    ]
+
+    const handleChartClick = (user, index) => {
+        setActiveClass(index);
+        setShowName(user?.name);
+        setShowAddr(user?.address);
+        setShowMail(user?.email);
+        setShowPhone(user?.phone);
+        setShowLink(user?.linkedin);
+
+        setShowRole1(user?.role1);
+        setShowRole2(user?.role2);
+        setShowRole3(user?.role3);
+        setShowQuali1(user?.quali1);
+        setShowQuali2(user?.quali2);
+        setShowQuali3(user?.quali3);
+        setShowQues1(user?.ques1);
+        setShowQues2(user?.ques2);
+        setShowQues3(user?.ques3);
+
+        setChartData(chartData.map(item => ({ ...item, A: Math.floor(Math.random() * 100) + 50, B: Math.floor(Math.random() * 100) + 50 })));
+        setProgBar(Math.floor(Math.random() * (100 - 10 + 1) + 10));
+    }
+
     return (
         <>
             {/* <div className="mytheme">
@@ -294,12 +330,12 @@ const Main = () => {
                         <label className="labels mb-2 ml-0">Location</label> <br />
                         <span className="label-content mt-0 mb-4 ml-0">Show me candidates located in:</span>
                         <br />
-                        <input type="text" className="searchBar search2 mt-3 mb-3" placeholder="Search.." onKeyDown={(e) => LocationTags(e)} />
+                        <input type="text" className={`${theme == "dark-theme" ? "searchBar" : "searchBar-light"} search2 mt-3 mb-3`} placeholder="Search.." onKeyDown={(e) => LocationTags(e)} />
 
                         <div className="tagsDiv">
                             {locTags?.map((data) => {
                                 return (
-                                    <span className="tags mb-2">{data} <i class="fa fa-times cursor" aria-hidden="true" onClick={() => handleDelLocTags(data)}></i></span>
+                                    <span className={`${theme == "dark-theme" ? "tags" : "tags-light"} mb-2`}>{data} <i class="fa fa-times cursor" aria-hidden="true" onClick={() => handleDelLocTags(data)}></i></span>
                                 )
                             })}
                         </div>
@@ -309,12 +345,12 @@ const Main = () => {
                         <label className="labels mb-2 ml-0">Skills & Keywords</label> <br />
                         <span className="label-content mt-0 mb-4 ml-0">Show me candidates matching any of the following:</span>
                         <br />
-                        <input type="text" className="searchBar search2 mt-3 mb-3" placeholder="Search.." onKeyDown={(e) => SkillTags(e)} />
+                        <input type="text" className={`${theme == "dark-theme" ? "searchBar" : "searchBar-light"} search2 mt-3 mb-3`} placeholder="Search.." onKeyDown={(e) => SkillTags(e)} />
 
                         <div className="tagsDiv">
                             {skillTags?.map((data) => {
                                 return (
-                                    <span className="tags mb-2">{data} <i class="fa fa-times cursor" aria-hidden="true" onClick={() => handleDelSkillTags(data)}></i></span>
+                                    <span className={`${theme == "dark-theme" ? "tags" : "tags-light"} mb-2`}>{data} <i class="fa fa-times cursor" aria-hidden="true" onClick={() => handleDelSkillTags(data)}></i></span>
                                 )
                             })}
                         </div>
@@ -324,12 +360,12 @@ const Main = () => {
                         <label className="labels mb-2 ml-0">Qualifications</label> <br />
                         <span className="label-content mt-0 mb-4 ml-0">Show me candidates with these qualifications:</span>
                         <br />
-                        <input type="text" className="searchBar search2 mt-3 mb-3" placeholder="Search.." onKeyDown={(e) => QualiTags(e)} />
+                        <input type="text" className={`${theme == "dark-theme" ? "searchBar" : "searchBar-light"} search2 mt-3 mb-3`} placeholder="Search.." onKeyDown={(e) => QualiTags(e)} />
 
                         <div className="tagsDiv">
                             {qualiTags?.map((data) => {
                                 return (
-                                    <span className="tags mb-2">{data} <i class="fa fa-times cursor" aria-hidden="true" onClick={() => handleDelQualiTags(data)}></i></span>
+                                    <span className={`${theme == "dark-theme" ? "tags" : "tags-light"} mb-2`}>{data} <i class="fa fa-times cursor" aria-hidden="true" onClick={() => handleDelQualiTags(data)}></i></span>
                                 )
                             })}
                         </div>
@@ -339,12 +375,12 @@ const Main = () => {
                         <label className="labels mb-2 ml-0">Previous Employers</label> <br />
                         <span className="label-content mt-0 mb-4 ml-0">Show me candidates matching these companies:</span>
                         <br />
-                        <input type="text" className="searchBar search2 mt-3 mb-3" placeholder="Search.." onKeyDown={(e) => EmpTags(e)} />
+                        <input type="text" className={`${theme == "dark-theme" ? "searchBar" : "searchBar-light"} search2 mt-3 mb-3`} placeholder="Search.." onKeyDown={(e) => EmpTags(e)} />
 
                         <div className="tagsDiv">
                             {empTags?.map((data) => {
                                 return (
-                                    <span className="tags mb-2">{data} <i class="fa fa-times cursor" aria-hidden="true" onClick={() => handleDelEmpTags(data)}></i></span>
+                                    <span className={`${theme == "dark-theme" ? "tags" : "tags-light"} mb-2`}>{data} <i class="fa fa-times cursor" aria-hidden="true" onClick={() => handleDelEmpTags(data)}></i></span>
                                 )
                             })}
                         </div>
@@ -436,6 +472,14 @@ const Main = () => {
                                     <div className="searchDiv">
 
                                         <div style={{ position: "relative", width: "100%" }}>
+
+                                            {/* <Select
+                                                options={selectOptions}
+                                                isClearable={true}
+                                                classNamePrefix="select"
+                                                isSearchable={true}
+                                            /> */}
+
                                             <select className="form-select selectSearch">
                                                 <option value="">All</option>
                                                 <option value="">All</option>
@@ -443,7 +487,8 @@ const Main = () => {
                                                 <option value="">All</option>
                                                 <option value="">All</option>
                                             </select>
-                                            {/* <img src={searchImg} className="searchImg" /> */}
+
+
                                             <i class={`fa fa-search ${theme == "dark-theme" ? "searchImg" : "searchImg-light"}`} aria-hidden="true"></i>
                                             <input type="text" className={theme == "dark-theme" ? "searchBar" : "searchBar-light"} placeholder="Search by: location, position, company, keywords..." />
                                         </div>
@@ -462,7 +507,7 @@ const Main = () => {
                             <div className="d-flex align-items-center" style={{ marginLeft: "-20px" }}>
                                 <img src={profileImg} height={42} width={42} className="cursor" />
                                 <Link to="/dashboard">
-                                    <img src={settingImg} className="ml-2" height={24} width={24} />
+                                    <img src={theme == "dark-theme" ? settingImg : settDarkImg} className="ml-2" height={24} width={24} />
                                 </Link>
                             </div>
                         </div>
@@ -673,7 +718,7 @@ const Main = () => {
                 <div className="col-3 customDiv3">
                     <div className={`${theme == "dark-theme" ? "gradBorderRight-dark" : "gradBorderRight-light"} customScroll`}>
                         <div className="d-flex justify-content-center">
-                            <div className="circleDiv">
+                            <div className={`${theme == "dark-theme" ? "circleDiv" : "circleDiv-light"}`}>
                                 <div className="percDiv circleChart">
                                     <h5 className="percSize">{progBar} <sup>%</sup></h5>
                                     <h5 className="percSizeText">match</h5>
@@ -721,28 +766,28 @@ const Main = () => {
                             {/* <img src={pdfImg} className="ml-4" /> */}
                         </div>
 
-                        <div className="d-flex align-items-center justify-content-center">
+                        <div className="addrDiv">
                             <div>
 
                                 <div>
                                     <div className="d-flex align-items-center justify-content-start mt-3">
                                         <img src={locImg} className="mr-2" />
-                                        <p className="addText">London, United Kingdom</p>
+                                        <p className="addText">{showAddr}</p>
                                     </div>
 
                                     <div className="d-flex align-items-center justify-content-start mt-2">
                                         <img src={mailImg} className="mr-2" />
-                                        <p className="addText">taylor.sift@outlook.com</p>
+                                        <p className="addText">{showMail}</p>
                                     </div>
 
                                     <div className="d-flex align-items-center justify-content-start mt-2">
                                         <img src={phoneImg} className="mr-2" />
-                                        <p className="addText ml-1">44 2258 257 021</p>
+                                        <p className="addText ml-1">{showPhone}</p>
                                     </div>
 
                                     <div className="d-flex align-items-center justify-content-start mt-2">
                                         <img src={linkedinImg} className="mr-2" />
-                                        <p className="addText">linkedin.com/taylor-sift</p>
+                                        <p className="addText">{showLink}</p>
                                     </div>
                                 </div>
 
@@ -757,7 +802,7 @@ const Main = () => {
                                     <div>
                                         <div id="faqhead1">
                                             <a href="#" class="btn-header-link" data-toggle="collapse" data-target="#faq1"
-                                                aria-expanded="true" aria-controls="faq1">Lead Data Scientist</a>
+                                                aria-expanded="true" aria-controls="faq1">{showRole1}</a>
                                         </div>
 
                                         <div id="faq1" class="collapse" aria-labelledby="faqhead1" data-parent="#faq">
@@ -770,7 +815,7 @@ const Main = () => {
                                     <div className="mt-2">
                                         <div id="faqhead2">
                                             <a href="#" class="btn-header-link" data-toggle="collapse" data-target="#faq2"
-                                                aria-expanded="true" aria-controls="faq2">Machine Learning Lead</a>
+                                                aria-expanded="true" aria-controls="faq2">{showRole2}</a>
                                         </div>
 
                                         <div id="faq2" class="collapse" aria-labelledby="faqhead2" data-parent="#faq">
@@ -783,7 +828,7 @@ const Main = () => {
                                     <div className="mt-2">
                                         <div id="faqhead3">
                                             <a href="#" class="btn-header-link" data-toggle="collapse" data-target="#faq3"
-                                                aria-expanded="true" aria-controls="faq3">ML DevOps</a>
+                                                aria-expanded="true" aria-controls="faq3">{showRole3}</a>
                                         </div>
 
                                         <div id="faq3" class="collapse" aria-labelledby="faqhead3" data-parent="#faq">
@@ -804,7 +849,7 @@ const Main = () => {
                                     <div>
                                         <div id="faqhead4">
                                             <a href="#" class="btn-header-link" data-toggle="collapse" data-target="#faq4"
-                                                aria-expanded="true" aria-controls="faq4">Phd Data Scientist</a>
+                                                aria-expanded="true" aria-controls="faq4">{showQuali1}</a>
                                         </div>
 
                                         <div id="faq4" class="collapse" aria-labelledby="faqhead4" data-parent="#faq2">
@@ -817,7 +862,7 @@ const Main = () => {
                                     <div className="mt-2">
                                         <div id="faqhead5">
                                             <a href="#" class="btn-header-link" data-toggle="collapse" data-target="#faq5"
-                                                aria-expanded="true" aria-controls="faq5">BS Computer</a>
+                                                aria-expanded="true" aria-controls="faq5">{showQuali2}</a>
                                         </div>
 
                                         <div id="faq5" class="collapse" aria-labelledby="faqhead5" data-parent="#faq2">
@@ -830,7 +875,7 @@ const Main = () => {
                                     <div className="mt-2">
                                         <div id="faqhead6">
                                             <a href="#" class="btn-header-link" data-toggle="collapse" data-target="#faq6"
-                                                aria-expanded="true" aria-controls="faq6">AWS Engineer</a>
+                                                aria-expanded="true" aria-controls="faq6">{showQuali3}</a>
                                         </div>
 
                                         <div id="faq6" class="collapse" aria-labelledby="faqhead6" data-parent="#faq2">
@@ -850,17 +895,17 @@ const Main = () => {
                                 <div style={{ margin: "15px 23px" }}>
                                     <div className="d-flex align-items-center justify-content-start mt-2">
                                         {/* <img src={tickImg} className="mr-2" /> */}
-                                        <p className="addText tick">Right to work</p>
+                                        <p className="addText tick">{showQues1}</p>
                                     </div>
 
                                     <div className="d-flex align-items-center justify-content-start mt-2">
                                         {/* <img src={crossImg} className="mr-2" style={{ marginLeft: "-4px" }} /> */}
-                                        <p className="addText cross">Portfolio: no</p>
+                                        <p className="addText cross">{showQues2}</p>
                                     </div>
 
                                     <div className="d-flex align-items-center justify-content-start mt-2">
                                         {/* <img src={tickImg} className="mr-2" /> */}
-                                        <p className="addText tick">Portfolio: no</p>
+                                        <p className="addText tick">{showQues3}</p>
                                     </div>
                                 </div>
                             </div>
