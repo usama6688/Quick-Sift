@@ -1,8 +1,9 @@
-import React from 'react'
+import React from 'react';
+import "../component/slider.css";
 
 import $ from 'jquery';
 const ChartSlider = () => {
-    $(window).on("load", function () {
+    $(function () {
         var range = $("#range").attr("value");
         $("#demo1").html(range);
         $(".slide1").css("width", "0%");
@@ -16,7 +17,7 @@ const ChartSlider = () => {
     return (
         <div className='d-flex flex-column w-90 ml-4' classname='myrange'>
             <div className="d-flex justify-content-between">
-                
+
                 <span id="demo1" style={{ color: "#BCBCBC" }}></span>
             </div>
 

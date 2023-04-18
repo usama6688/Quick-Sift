@@ -13,6 +13,7 @@ import { useEffect } from "react";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import ModelComponent from "./Modal";
+import Select from "react-select";
 import '../App.css';
 
 const Main = () => {
@@ -29,7 +30,6 @@ const Main = () => {
     const [showMail, setShowMail] = useState("taylor.sift@outlook.com");
     const [showPhone, setShowPhone] = useState("44 2258 257 021");
     const [showLink, setShowLink] = useState("linkedin.com/taylor-sift");
-
     const [showRole1, setShowRole1] = useState("Test");
     const [showRole2, setShowRole2] = useState("Test2");
     const [showRole3, setShowRole3] = useState("Test3");
@@ -117,7 +117,7 @@ const Main = () => {
             page: "6",
         },
         {
-            page: ">",
+            page: "7",
         },
     ]
 
@@ -296,26 +296,6 @@ const Main = () => {
 
     return (
         <>
-            {/* <div className="mytheme">
-                {theme === "light-theme" ? (
-                    <img
-                        src="https://static.vecteezy.com/system/resources/previews/009/665/616/original/sun-clipart-illustration-free-png.png"
-                        width="24px"
-                        height="24px"
-                        alt=""
-                        onClick={() => ToggleTheme()}
-                    />
-                ) : (
-                    <img
-                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Font_Awesome_5_regular_moon.svg/1200px-Font_Awesome_5_regular_moon.svg.png"
-                        onClick={() => ToggleTheme()}
-                        width="24px"
-                        height="24px"
-                        alt=""
-                        className="pointer"
-                    />
-                )}
-            </div> */}
 
             <ModelComponent
                 size="md"
@@ -330,7 +310,7 @@ const Main = () => {
                         <label className="labels mb-2 ml-0">Location</label> <br />
                         <span className="label-content mt-0 mb-4 ml-0">Show me candidates located in:</span>
                         <br />
-                        <input type="text" className={`${theme == "dark-theme" ? "searchBar" : "searchBar-light"} search2 mt-3 mb-3`} placeholder="Search.." onKeyDown={(e) => LocationTags(e)} />
+                        <input type="text" className={`${theme == "dark-theme" ? "searchBar" : "searchBar-light"} search2 mt-4 mb-3`} placeholder="Search.." onKeyDown={(e) => LocationTags(e)} />
 
                         <div className="tagsDiv">
                             {locTags?.map((data) => {
@@ -345,7 +325,7 @@ const Main = () => {
                         <label className="labels mb-2 ml-0">Skills & Keywords</label> <br />
                         <span className="label-content mt-0 mb-4 ml-0">Show me candidates matching any of the following:</span>
                         <br />
-                        <input type="text" className={`${theme == "dark-theme" ? "searchBar" : "searchBar-light"} search2 mt-3 mb-3`} placeholder="Search.." onKeyDown={(e) => SkillTags(e)} />
+                        <input type="text" className={`${theme == "dark-theme" ? "searchBar" : "searchBar-light"} search2 mt-4 mb-3`} placeholder="Search.." onKeyDown={(e) => SkillTags(e)} />
 
                         <div className="tagsDiv">
                             {skillTags?.map((data) => {
@@ -360,7 +340,7 @@ const Main = () => {
                         <label className="labels mb-2 ml-0">Qualifications</label> <br />
                         <span className="label-content mt-0 mb-4 ml-0">Show me candidates with these qualifications:</span>
                         <br />
-                        <input type="text" className={`${theme == "dark-theme" ? "searchBar" : "searchBar-light"} search2 mt-3 mb-3`} placeholder="Search.." onKeyDown={(e) => QualiTags(e)} />
+                        <input type="text" className={`${theme == "dark-theme" ? "searchBar" : "searchBar-light"} search2 mt-4 mb-3`} placeholder="Search.." onKeyDown={(e) => QualiTags(e)} />
 
                         <div className="tagsDiv">
                             {qualiTags?.map((data) => {
@@ -375,7 +355,7 @@ const Main = () => {
                         <label className="labels mb-2 ml-0">Previous Employers</label> <br />
                         <span className="label-content mt-0 mb-4 ml-0">Show me candidates matching these companies:</span>
                         <br />
-                        <input type="text" className={`${theme == "dark-theme" ? "searchBar" : "searchBar-light"} search2 mt-3 mb-3`} placeholder="Search.." onKeyDown={(e) => EmpTags(e)} />
+                        <input type="text" className={`${theme == "dark-theme" ? "searchBar" : "searchBar-light"} search2 mt-4 mb-3`} placeholder="Search.." onKeyDown={(e) => EmpTags(e)} />
 
                         <div className="tagsDiv">
                             {empTags?.map((data) => {
@@ -394,15 +374,15 @@ const Main = () => {
 
             </ModelComponent>
 
+            <div className="logoDiv">
+                <img src={theme == "dark-theme" ? logoImg : logoLightImg} className="mb-3" height={30} width={128} style={{ objectFit: "contain" }} />
+            </div>
+
             <div className="row">
 
                 <div className={theme == "dark-theme" ? "col-2 customDiv styleDiv-dark" : "col-2 customDiv styleDiv-light"}>
 
-                    <div className="text-center">
-                        <img src={theme == "dark-theme" ? logoImg : logoLightImg} className="mb-3" height={30} width={128} style={{ objectFit: "contain" }} />
-                    </div>
-
-                    <ul className="nav nav-pills flex-column ">
+                    <ul className="nav nav-pills flex-column" style={{ gap: "10px" }}>
 
                         {userData?.map((user, index) => {
                             return (
@@ -436,6 +416,9 @@ const Main = () => {
                                     </li>
                                 )
                             })}
+                            <li>
+                                <i class="fa fa-angle-right" aria-hidden="true"></i>
+                            </li>
                         </ul>
                     </div>
 
@@ -478,14 +461,40 @@ const Main = () => {
                                                 isClearable={true}
                                                 classNamePrefix="select"
                                                 isSearchable={true}
+                                                menuIsOpen={true}
+                                                placeholder="All"
                                             /> */}
 
-                                            <select className="form-select selectSearch">
+                                            <select className="form-select selectSearch customScroll">
                                                 <option value="">All</option>
-                                                <option value="">All</option>
-                                                <option value="">All</option>
-                                                <option value="">All</option>
-                                                <option value="">All</option>
+                                                <option value="">Location</option>
+                                                <option value="">Skills & Keywords</option>
+                                                <option value="">Qualifications</option>
+                                                <option value="">Previous Employers</option>
+                                                {/* <option value="">Beauty & Personal Care</option>
+                                                <option value="">Books</option>
+                                                <option value="">Boy's Fashion</option>
+                                                <option value="">Computers</option>
+                                                <option value="">Deals</option>
+                                                <option value="">Digital Music</option>
+                                                <option value="">Electronics</option>
+                                                <option value="">Girls's Fashion</option>
+                                                <option value="">Health & Household</option>
+                                                <option value="">Home & Kitchen</option>
+                                                <option value="">Industrial & Scientific</option>
+                                                <option value="">Kindle Store</option>
+                                                <option value="">Luggage</option>
+                                                <option value="">Men's Fashion</option>
+                                                <option value="">Movies & TV</option>
+                                                <option value="">Music, CD's & vinyl</option>
+                                                <option value="">Pet Supplies</option>
+                                                <option value="">Prime Video</option>
+                                                <option value="">Software</option>
+                                                <option value="">Sports & Outdoors</option>
+                                                <option value="">Tools & Home Improvements</option>
+                                                <option value="">Toys and Games</option>
+                                                <option value="">Video Games</option>
+                                                <option value="">Women's Fashion</option> */}
                                             </select>
 
 
@@ -558,7 +567,7 @@ const Main = () => {
                             <div className={theme == "dark-theme" ? "gradBorder-dark" : "gradBorder-light"}>
                                 <label className="labels">Experience & Tenure</label>
 
-                                <div style={{ margin: "0 20px 20px 20px" }}>
+                                <div style={{ margin: "0 35px 20px 35px" }}>
                                     <label className="chartLabel">Total Experience (Years)</label>
                                     {/* <div class="progress">
                     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style={{ width: "75%" }}></div>
@@ -607,6 +616,13 @@ const Main = () => {
                                                 <stop offset="100%" style={{ stopColor: "#A05CE6", stopOpacity: "1" }} />
                                                 <stop offset="0%" style={{ stopColor: "#D952CA", stopOpacity: "1" }} />
                                                 <stop offset="0%" style={{ stopColor: "#FF51AC", stopOpacity: "1" }} />
+                                            </linearGradient>
+
+                                            <linearGradient id="gradText" x1="0%" y1="0%" x2="100%" y2="0%">
+                                                <stop offset="0%" style={{ stopColor: "#1968FA", stopOpacity: "1" }} />
+                                                {/* <stop offset="100%" style={{ stopColor: "#A05CE6", stopOpacity: "1" }} /> */}
+                                                <stop offset="100%" style={{ stopColor: "#D952CA", stopOpacity: "1" }} />
+                                                <stop offset="100%" style={{ stopColor: "#FF51AC", stopOpacity: "1" }} />
                                             </linearGradient>
                                         </defs>
 
@@ -763,30 +779,30 @@ const Main = () => {
 
                         <div className="d-flex align-items-center justify-content-center mt-3">
                             <h6 className="userName">{showName}</h6>
-                            {/* <img src={pdfImg} className="ml-4" /> */}
+                            <img src={pdfImg} className="ml-4" />
                         </div>
 
                         <div className="addrDiv">
                             <div>
 
-                                <div>
+                                <div style={{ padding: "2rem" }}>
                                     <div className="d-flex align-items-center justify-content-start mt-3">
-                                        <img src={locImg} className="mr-2" />
+                                        <img src={locImg} className="mr-3" />
                                         <p className="addText">{showAddr}</p>
                                     </div>
 
                                     <div className="d-flex align-items-center justify-content-start mt-2">
-                                        <img src={mailImg} className="mr-2" />
+                                        <img src={mailImg} className="mr-3" />
                                         <p className="addText">{showMail}</p>
                                     </div>
 
                                     <div className="d-flex align-items-center justify-content-start mt-2">
-                                        <img src={phoneImg} className="mr-2" />
+                                        <img src={phoneImg} className="mr-3" />
                                         <p className="addText ml-1">{showPhone}</p>
                                     </div>
 
                                     <div className="d-flex align-items-center justify-content-start mt-2">
-                                        <img src={linkedinImg} className="mr-2" />
+                                        <img src={linkedinImg} className="mr-3" />
                                         <p className="addText">{showLink}</p>
                                     </div>
                                 </div>
@@ -892,19 +908,16 @@ const Main = () => {
                             <h6 className="heads">FILTER QUESTIONS</h6>
 
                             <div className={theme == "dark-theme" ? "smallBox-dark mx-auto mt-3" : "smallBox-light mx-auto mt-3"}>
-                                <div style={{ margin: "15px 23px" }}>
+                                <div className="filtQues">
                                     <div className="d-flex align-items-center justify-content-start mt-2">
-                                        {/* <img src={tickImg} className="mr-2" /> */}
                                         <p className="addText tick">{showQues1}</p>
                                     </div>
 
                                     <div className="d-flex align-items-center justify-content-start mt-2">
-                                        {/* <img src={crossImg} className="mr-2" style={{ marginLeft: "-4px" }} /> */}
                                         <p className="addText cross">{showQues2}</p>
                                     </div>
 
                                     <div className="d-flex align-items-center justify-content-start mt-2">
-                                        {/* <img src={tickImg} className="mr-2" /> */}
                                         <p className="addText tick">{showQues3}</p>
                                     </div>
                                 </div>

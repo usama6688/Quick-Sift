@@ -1,8 +1,9 @@
-import React from 'react'
+import React from 'react';
+import "../component/slider.css";
 
 import $ from 'jquery';
 const PeriodSlide = () => {
-    $(window).on("load", function () {
+    $(function () {
         var range = $("#range3").attr("value");
         $("#demo3").html(range);
         $(".slide3").css("width", "0%");
@@ -16,7 +17,7 @@ const PeriodSlide = () => {
     return (
         <div className='d-flex flex-column w-90 mx-4' classname='myrange'>
             <div className="d-flex justify-content-between">
-               
+
                 <span id="demo3" style={{ color: "#BCBCBC" }}></span>
             </div>
 

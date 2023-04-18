@@ -33,3 +33,6 @@ export { default as calImg } from './img/cal.svg';
 export { default as toltipImg } from './img/toltip.svg';
 export { default as radarImg } from './img/radar.svg';
 export { default as settDarkImg } from './img/settDark.svg';
+export { default as tipImg } from './img/tip.svg';
+export { default as tooltipImg } from './img/tooltip.svg';
+export { default as eyeImg } from './img/eye.svg';

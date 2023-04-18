@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 
-import { calImg, crossImg, linkedinImg, locImg, logoImg, logoLightImg, mailImg, mapImg, pdfImg, phoneImg, profileImg, radarImg, searchImg, settImg, settingImg, textsImg, tickImg, toltipImg } from "../assets";
+import { calImg, crossImg, eyeImg, linkedinImg, locImg, logoImg, logoLightImg, mailImg, mapImg, pdfImg, phoneImg, profileImg, radarImg, searchImg, settImg, settingImg, textsImg, tickImg, tipImg, toltipImg, tooltipImg } from "../assets";
 import {
     Radar, RadarChart, PolarGrid,
     PolarAngleAxis, PolarRadiusAxis, BarChart, Bar, ResponsiveContainer, CartesianGrid, XAxis, YAxis, Legend
@@ -9,7 +9,7 @@ import { CircleProgress } from 'react-gradient-progress';
 import ReactWordcloud from 'react-wordcloud';
 
 import userData from "../data";
-import { NavLink } from "react-bootstrap";
+import { NavLink, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { TagCloud } from "react-tagcloud";
 import { useEffect } from "react";
 import PeriodSlide from "./PeriodSlide";
@@ -17,6 +17,7 @@ import ChartSlider from "./ChartSlider";
 const Desktop = () => {
     const [theme, setTheme] = useState("dark-theme");
     const [activeClass, setActiveClass] = useState(0);
+    const [isShown, setIsShown] = useState(false);
 
     useEffect(() => {
         document.body.className = theme;
@@ -57,11 +58,11 @@ const Desktop = () => {
 
                 <div className={theme == "dark-theme" ? "col-3 customDiv styleDiv-dark" : "col-3 customDiv styleDiv-light"}>
 
-                    <div className="text-center">
+                    <div className="text-center mt-3">
                         <img src={theme == "dark-theme" ? logoImg : logoLightImg} className="mb-3" height={30} width={128} style={{ objectFit: "contain" }} />
                     </div>
 
-                    <ul className="nav nav-pills flex-column ">
+                    <ul className="nav nav-pills navSetting flex-column mt-5" style={{ gap: "10px" }}>
 
                         <li className="nav-item">
                             <NavLink
@@ -128,7 +129,7 @@ const Desktop = () => {
                                 </span>
                             </label>
                         </div>
-                        
+
                     </div>
 
                 </div>
@@ -174,8 +175,41 @@ const Desktop = () => {
 
                         <div className="col-12 b-border"></div>
 
-                        <div className="col-12  d-flex flex-column justify-content-center divPad">
-                            <label className="labels mb-4">Filter Questions</label>
+                        <div className="col-12  d-flex flex-column justify-content-center divPad2">
+
+                            {/* <OverlayTrigger
+                                placement="top"
+                                onEntering={EnterColor}
+                                overlay={
+                                    <Tooltip className='text-justify' id="tooltip-right">
+                                        Show or hide filter questions in your dashboard.
+                                    </Tooltip>
+                                }
+                            >
+                        </OverlayTrigger> */}
+
+                            {isShown &&
+                                <div className="tipMainDiv">
+                                    <div className="tipDiv">
+                                        <img src={tooltipImg} />
+                                        <img src={tipImg} className="tipImg" />
+                                    </div>
+                                </div>
+                            }
+
+                            <label className="labels mb-4 eyeIcon">
+                                <p className="mb-0 cursor pWid"
+                                    onMouseEnter={() => setIsShown(true)}
+                                    onMouseLeave={() => setIsShown(false)}
+                                >
+                                    Filter Questions
+                                </p>
+
+                                <img src={eyeImg} width="30" className="cursor"/>
+                            </label>
+
+
+
                             <span className="label-content mt-0 mb-4">Choose minimum years experience</span>
                         </div>
                         <div className="col-12 b-border"></div>
