@@ -530,6 +530,22 @@ option:hover {
   gap: 1.2rem;
 }
 
+.suggest {
+  padding-left: 0;
+  margin-bottom: 0;
+  margin-top: -10px;
+}
+
+.suggest li {
+  list-style: none;
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: capitalize;
+  padding: 10px 0;
+  border-bottom: 1px solid;
+  cursor: pointer;
+}
+
 .filtQues {
   display: grid;
   gap: 1.2rem;

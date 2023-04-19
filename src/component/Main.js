@@ -250,9 +250,9 @@ const Main = () => {
         }
     }
 
-    const handleDelLocTags = (data) => {
-        setLocTags(locTags?.filter(tag => tag !== data));
-    };
+    // const handleDelLocTags = (data) => {
+    //     setLocTags(locTags?.filter(tag => tag !== data));
+    // };
 
     const handleDelSkillTags = (data) => {
         setSkillTags(skillTags?.filter(tag => tag !== data));
@@ -279,7 +279,6 @@ const Main = () => {
         setShowMail(user?.email);
         setShowPhone(user?.phone);
         setShowLink(user?.linkedin);
-
         setShowRole1(user?.role1);
         setShowRole2(user?.role2);
         setShowRole3(user?.role3);
@@ -289,10 +288,35 @@ const Main = () => {
         setShowQues1(user?.ques1);
         setShowQues2(user?.ques2);
         setShowQues3(user?.ques3);
-
         setChartData(chartData.map(item => ({ ...item, A: Math.floor(Math.random() * 100) + 50, B: Math.floor(Math.random() * 100) + 50 })));
         setProgBar(Math.floor(Math.random() * (100 - 10 + 1) + 10));
     }
+
+
+    const [value, setValue] = useState('');
+    const [suggestions, setSuggestions] = useState(['Australia', 'Austria', 'Guinea-Bissau', 'Mauritania']);
+    const [selectedTags, setSelectedTags] = useState([]);
+    const [showOnChange, setShowOnChange] = useState(false);
+
+    const handleInputChange = (event) => {
+        setValue(event.target.value);
+        setShowOnChange(true);
+        setSuggestions(
+            ['Australia', 'Austria', 'Guinea-Bissau', 'Mauritania'].filter((item) =>
+                item.toLowerCase().startsWith(event.target.value.toLowerCase())
+            )
+        );
+    };
+
+    const handleSelectSuggestion = (suggestion) => {
+        setSelectedTags([...selectedTags, suggestion]);
+        setValue('');
+        setShowOnChange(false);
+    };
+
+    const handleDelLocTags = (tag) => {
+        setSelectedTags(selectedTags.filter((item) => item !== tag));
+    };
 
     return (
         <>
@@ -310,7 +334,30 @@ const Main = () => {
                         <label className="labels mb-2 ml-0">Location</label> <br />
                         <span className="label-content mt-0 mb-4 ml-0">Show me candidates located in:</span>
                         <br />
-                        <input type="text" className={`${theme == "dark-theme" ? "searchBar" : "searchBar-light"} search2 mt-4 mb-3`} placeholder="Search.." onKeyDown={(e) => LocationTags(e)} />
+
+                        <input type="text" value={value} className={`${theme == "dark-theme" ? "searchBar" : "searchBar-light"} search2 mt-4 mb-3`} placeholder="Search.." onChange={handleInputChange} />
+
+                        {showOnChange &&
+                            <ul className="suggest">
+                                {suggestions?.length ? suggestions?.map((item) => (
+                                    <li key={item} onClick={() => handleSelectSuggestion(item)}>
+                                        {item}
+                                    </li>
+                                )) :
+                                    <li>
+                                        No record found
+                                    </li>
+                                }
+                            </ul>
+                        }
+
+                        <div className="tagsDiv">
+                            {selectedTags.map((data) => (
+                                <span key={data} className={`${theme == "dark-theme" ? "tags" : "tags-light"} mb-2 mt-2`}>{data} <i class="fa fa-times cursor" aria-hidden="true" onClick={() => handleDelLocTags(data)}></i></span>
+                            ))}
+                        </div>
+
+                        {/* <input type="text" className={`${theme == "dark-theme" ? "searchBar" : "searchBar-light"} search2 mt-4 mb-3`} placeholder="Search.." onKeyDown={(e) => LocationTags(e)} />
 
                         <div className="tagsDiv">
                             {locTags?.map((data) => {
@@ -318,7 +365,7 @@ const Main = () => {
                                     <span className={`${theme == "dark-theme" ? "tags" : "tags-light"} mb-2`}>{data} <i class="fa fa-times cursor" aria-hidden="true" onClick={() => handleDelLocTags(data)}></i></span>
                                 )
                             })}
-                        </div>
+                        </div> */}
                     </div>
 
                     <div className="mt-4">
